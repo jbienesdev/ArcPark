@@ -6,7 +6,7 @@
       <div class="flex-1 flex justify-center items-center h-screen flex-col">
         <img class="h-48 w-auto" src="@/assets/images/CarLogo.svg" alt="Arcpark Logo">
         <h1 class="font-sans tracking-wide text-3xl font-semibold text-center text-indigo mb-4 uppercase">ArcPark</h1>
-        <form class="w-full flex items-center flex-col" @submit.prevent="logIn">
+        <form class="w-full flex items-center flex-col" @submit.prevent="logInUser">
           <div class="mb-4 xsm:w-3/4 md:w-1/2 ">
             <label for="email" class="font-sans block text-grey-darker text-sm font-bold mb-2">
               Email
@@ -36,6 +36,13 @@ export default {
     return {
       email: '',
       password: ''
+    }
+  },
+  methods: {
+    logInUser() {
+      const { email, password } = this
+      this.$store.dispatch('LOG_IN_USER', { email, password })
+        .then(() => this.$router.push('/admin/dashboard'))
     }
   }
 }
