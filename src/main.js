@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import store from './store/index'
 
 import '@/assets/css/tailwind.css'
+import '@/config/google-maps'
+import '@/config/firestore'
 
 Vue.config.productionTip = false
 

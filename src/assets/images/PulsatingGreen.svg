@@ -1,0 +1,24 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 316 284" style="enable-background:new 0 0 316.4 284.3;" id="el_zo-7XTWDr" width="75px" height="75px">
+	<style>
+		@-webkit-keyframes el_qQNy2QZuPb_Animation{0%{opacity: 1;}70%{opacity: 0;}100%{opacity: 0;}}@keyframes el_qQNy2QZuPb_Animation{0%{opacity: 1;}70%{opacity: 0;}100%{opacity: 0;}}@-webkit-keyframes el_qQNy2QZuPb_aw1w33dCT_Animation{0%{-webkit-transform: scale(0.5, 0.5);transform: scale(0.5, 0.5);}50%{-webkit-transform: scale(1, 1);transform: scale(1, 1);}100%{-webkit-transform: scale(1, 1);transform: scale(1, 1);}}@keyframes el_qQNy2QZuPb_aw1w33dCT_Animation{0%{-webkit-transform: scale(0.5, 0.5);transform: scale(0.5, 0.5);}50%{-webkit-transform: scale(1, 1);transform: scale(1, 1);}100%{-webkit-transform: scale(1, 1);transform: scale(1, 1);}}#el_zo-7XTWDr *{-webkit-animation-duration: 1s;animation-duration: 1s;-webkit-animation-iteration-count: infinite;animation-iteration-count: infinite;-webkit-animation-timing-function: cubic-bezier(0, 0, 1, 1);animation-timing-function: cubic-bezier(0, 0, 1, 1);}#el_sa1-QTxyR6{fill: #30F973;}#el_qQNy2QZuPb{fill: #30F973;-webkit-animation-name: el_qQNy2QZuPb_Animation;animation-name: el_qQNy2QZuPb_Animation;opacity: 1;}#el_qQNy2QZuPb_aw1w33dCT{-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;transform-box: fill-box;-webkit-transform: scale(0.5, 0.5);transform: scale(0.5, 0.5);-webkit-animation-name: el_qQNy2QZuPb_aw1w33dCT_Animation;animation-name: el_qQNy2QZuPb_aw1w33dCT_Animation;}
+	</style>
+	<g id="el_4HOUvc06Gs">
+	</g>
+	<g id="el_sJkh2kst4g">
+		<g id="el_LUGlYU_AKl">
+			<g id="el_ishxTu2Oqg">
+				<circle cx="161.2" cy="142.1" r="38.4" id="el_sa1-QTxyR6"/>
+			</g>
+		</g>
+		<g id="el_z1j-1_GKia">
+			<g id="el_GUdioQ5yNs">
+				<g id="el_qQNy2QZuPb_aw1w33dCT" data-animator-group="true" data-animator-type="2">
+					<path d="M161.2,73.4c38,0,68.8,30.8,68.8,68.8s-30.8,68.8-68.8,68.8s-68.8-30.8-68.8-68.8S123.2,73.4,161.2,73.4&#xA;&#9;&#9;&#9;&#9; M161.2,70.1c-39.8,0-72.1,32.2-72.1,72.1s32.2,72.1,72.1,72.1s72.1-32.2,72.1-72.1S201,70.1,161.2,70.1L161.2,70.1z" id="el_qQNy2QZuPb"/>
+				</g>
+			</g>
+		</g>
+	</g>
+	<script>
+			(function(){var a=document.querySelector('#el_zo-7XTWDr'),b=a.querySelectorAll('style'),c=function(d){b.forEach(function(f){var g=f.textContent;g&amp;&amp;(f.textContent=g.replace(/transform-box:[^;\r\n]*/gi,'transform-box: '+d))})};c('initial'),window.requestAnimationFrame(function(){return c('fill-box')})})();
+	</script>
+</svg>
