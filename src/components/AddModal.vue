@@ -6,7 +6,7 @@
           <label class="block text-grey-darker text-sm font-bold mb-2" for="area-number">
             Area Number
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="area-number" type="text">
+          <input v-model="areaNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="area-number" type="text">
         </div>
         <div class="flex flex-wrap mb-4">
           <!-- Latitude -->
@@ -14,21 +14,21 @@
             <label class="block text-grey-darker text-sm font-bold mb-2" for="latitude">
               Latitude
             </label>
-            <input v-model="coordinates.lat" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="latitude" type="text">
+            <input readonly v-model="coordinates.lat" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="latitude" type="text">
           </div>
           <!-- Longitude -->
           <div class="w-full md:w-1/2 md:pl-2">
             <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
               Longitude
             </label>
-            <input v-model="coordinates.lng" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
+            <input readonly v-model="coordinates.lng" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
           </div>
         </div>
         <div class="mb-6">
           
         </div>
         <div class="flex items-center justify-between">
-          <button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+          <button @click="addParkingArea" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
             Add Parking Area
           </button>
           <a class="cursor-pointer text-red hover:text-red-darker no-underline" @click="$emit('close-modal')">Cancel</a>
@@ -42,8 +42,24 @@
 export default {
   props: {
     coordinates: {
-      type: Object,
-      required: true
+      lat: Number,
+      lng: Number
+    }
+  },
+  data() {
+    return {
+      areaNumber: ''
+    }
+  },
+  methods: {
+    addParkingArea() {
+      let { areaNumber, coordinates } = this
+      this.$store.dispatch('ADD_PARKING_AREA', {
+        areaNumber,
+        coordinates
+      }).then(() => {
+        this.$emit('update:addModalVisible', false)
+      })
     }
   }
 }

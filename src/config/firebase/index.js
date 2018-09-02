@@ -1,5 +1,5 @@
 import { firebase } from "@firebase/app";
-import "@firebase/firestore";
+import "@firebase/database";
 
 const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyCUbLt0vI0Y6jwx7m1z0IPGdDI1DxhfULc",
@@ -10,4 +10,4 @@ const firebaseApp = firebase.initializeApp({
   messagingSenderId: "569429999510"
 });
 
-export const db = firebaseApp.firestore();
+export const db = firebaseApp.database();

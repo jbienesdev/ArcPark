@@ -7,7 +7,7 @@ import store from './store/index'
 
 import '@/assets/css/tailwind.css'
 import '@/config/google-maps'
-import '@/config/firestore'
+import '@/config/vuefire'
 import '@/config/firebase'
 
 Vue.config.productionTip = false
