@@ -43,6 +43,13 @@ export default {
       const { email, password } = this
       this.$store.dispatch('LOG_IN_USER', { email, password })
         .then(() => this.$router.push('/admin/dashboard'))
+        .catch(err => {
+          this.$notify({
+            type: 'error',
+            title: err.code,
+            text: err.message
+          })
+        })
     }
   }
 }
