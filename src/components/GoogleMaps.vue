@@ -11,7 +11,7 @@
       <GmapMarker
         v-for="parkingArea in parkingAreas"
         :key="parkingArea['.key']"
-        :position="{lat:parkingArea.lat, lng:parkingArea.lng}"
+        :position="{ lat: parseFloat(parkingArea.lat), lng: parseFloat(parkingArea.lng) }"
         :icon="parkingArea.status === 'available' 
           ? 'https://firebasestorage.googleapis.com/v0/b/nuxt-blog-536a8.appspot.com/o/PulsatingGreen.svg?alt=media&token=2ef3019f-4524-4601-9b69-8ba78a011854' 
           : 'https://firebasestorage.googleapis.com/v0/b/nuxt-blog-536a8.appspot.com/o/PulsatingRed.svg?alt=media&token=cc9210d5-d822-4835-923a-c93f84c64956'"
