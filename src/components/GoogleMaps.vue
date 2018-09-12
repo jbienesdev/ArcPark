@@ -53,11 +53,11 @@ export default {
       // Pass data to parent Dashboard component
       this.$emit('update:coordinates', { lat, lng })
       this.$emit('update:addModalVisible', true)
+      
     },
     onMarkerClick(e) {
-      const lat = e.latLng.lat()
-      const lng = e.latLng.lng()
-      console.log(lat, lng)
+      // const lat = e.latLng.lat()
+      // const lng = e.latLng.lng()
     }
   }
 }

@@ -20,10 +20,11 @@ export default {
     areaNumber,
     coordinates
   }) => {
-    return db.ref(`parking_area/${areaNumber}`).set({
-      lat: coordinates.lat,
-      lng: coordinates.lng,
-      status: 'available'
-    })
+    if(areaNumber)
+      return db.ref(`parking_area/${areaNumber}`).set({
+        lat: coordinates.lat,
+        lng: coordinates.lng,
+        status: 'available'
+      })
   }
 }

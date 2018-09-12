@@ -9,6 +9,7 @@ import '@/assets/css/tailwind.css'
 import '@/config/google-maps'
 import '@/config/vuefire'
 import '@/config/firebase'
+import '@/config/vue-notification'
 
 Vue.config.productionTip = false
 

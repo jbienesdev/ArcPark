@@ -6,7 +6,7 @@
           <label class="block text-grey-darker text-sm font-bold mb-2" for="area-number">
             Area Number
           </label>
-          <input v-model="areaNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="area-number" type="text">
+          <input v-model.trim="areaNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="area-number" type="text">
         </div>
         <div class="flex flex-wrap mb-4">
           <!-- Latitude -->
@@ -54,12 +54,21 @@ export default {
   methods: {
     addParkingArea() {
       let { areaNumber, coordinates } = this
-      this.$store.dispatch('ADD_PARKING_AREA', {
-        areaNumber,
-        coordinates
-      }).then(() => {
-        this.$emit('update:addModalVisible', false)
-      })
+      // If areaNumber is empty
+      if(areaNumber) {
+        this.$store.dispatch('ADD_PARKING_AREA', {
+          areaNumber,
+          coordinates
+        }).then(() => {
+          this.$emit('update:addModalVisible', false)
+        })
+      } else {
+        this.$notify({
+          type: 'error',
+          title: 'Error',
+          text: 'Kindly fill up the area number field.'
+        })
+      }
     }
   }
 }
