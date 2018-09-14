@@ -7,5 +7,11 @@ export default {
   },
   SET_PARKING_AREAS: (state, payload) => {
     state.parkingAreas = payload
+  },
+  TOGGLE_ADDMODAL: (state, payload) => {
+    state.addModalVisible = payload
+  },
+  SET_CLICKED_COORDINATES: (state, payload) => {
+    state.clickedCoordinates = payload
   }
 }

@@ -37,5 +37,9 @@ export default {
       })
       commit('SET_PARKING_AREAS', parkingAreaArray)
     })
+  },
+  // gets the coordinate that was clicked in the map
+  CLICKED_COORDINATES: ({ commit }, { lat, lng }) => {
+    commit('SET_CLICKED_COORDINATES', { lat, lng })
   }
 }

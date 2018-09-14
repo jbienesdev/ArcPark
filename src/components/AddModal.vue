@@ -14,14 +14,14 @@
             <label class="block text-grey-darker text-sm font-bold mb-2" for="latitude">
               Latitude
             </label>
-            <input readonly v-model="coordinates.lat" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="latitude" type="text">
+            <input readonly v-model="getClickedCoordinates.lat" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="latitude" type="text">
           </div>
           <!-- Longitude -->
           <div class="w-full md:w-1/2 md:pl-2">
             <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
               Longitude
             </label>
-            <input readonly v-model="coordinates.lng" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
+            <input readonly v-model="getClickedCoordinates.lng" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
           </div>
         </div>
         <div class="mb-6">
@@ -31,7 +31,7 @@
           <button @click="addParkingArea" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
             Add Parking Area
           </button>
-          <a class="cursor-pointer text-red hover:text-red-darker no-underline" @click="$emit('close-modal')">Cancel</a>
+          <a class="cursor-pointer text-red hover:text-red-darker no-underline" @click="$store.commit('TOGGLE_ADDMODAL', false)">Cancel</a>
         </div>
       </form>
     </div>
@@ -40,12 +40,6 @@
 
 <script>
 export default {
-  props: {
-    coordinates: {
-      lat: Number,
-      lng: Number
-    }
-  },
   data() {
     return {
       areaNumber: ''
@@ -58,9 +52,9 @@ export default {
       if(areaNumber) {
         this.$store.dispatch('ADD_PARKING_AREA', {
           areaNumber,
-          coordinates
+          coordinates: this.getClickedCoordinates
         }).then(() => {
-          this.$emit('update:addModalVisible', false)
+          this.$store.commit('TOGGLE_ADDMODAL', false)
         })
       } else {
         this.$notify({
@@ -69,6 +63,11 @@ export default {
           text: 'Kindly fill up the area number field.'
         })
       }
+    }
+  },
+  computed: {
+    getClickedCoordinates() {
+      return this.$store.getters['getClickedCoordinates']
     }
   }
 }

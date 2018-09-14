@@ -12,7 +12,9 @@ export default new Vuex.Store({
   state: {
     user: null,
     isLoggedIn: false,
-    parkingAreas: []
+    parkingAreas: [],
+    addModalVisible: false,
+    clickedCoordinates: null
   },
   actions,
   mutations,

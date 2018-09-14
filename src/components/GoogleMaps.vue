@@ -27,11 +27,6 @@ import { db } from '@/config/firebase'
 
 export default {
   props: {
-    addModalVisible: Boolean,
-    coordinates: {
-      lat: Number,
-      lng: Number
-    },
     isClickable: Boolean
   },
   data() {
@@ -51,9 +46,8 @@ export default {
       const lat = e.latLng.lat()
       const lng = e.latLng.lng()
       // Pass data to parent Dashboard component
-      this.$emit('update:coordinates', { lat, lng })
-      this.$emit('update:addModalVisible', true)
-      
+      this.$store.dispatch('CLICKED_COORDINATES', { lat, lng })
+      this.$store.commit('TOGGLE_ADDMODAL', true)
     },
     onMarkerClick(e) {
       // const lat = e.latLng.lat()
