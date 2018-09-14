@@ -4,5 +4,8 @@ export default {
   },
   SET_USER: (state, payload) => {
     state.user = payload
+  },
+  SET_PARKING_AREAS: (state, payload) => {
+    state.parkingAreas = payload
   }
 }

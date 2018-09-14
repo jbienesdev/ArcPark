@@ -11,7 +11,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    parkingAreas: []
   },
   actions,
   mutations,

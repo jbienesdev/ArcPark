@@ -7,7 +7,6 @@ import store from './store/index'
 
 import '@/assets/css/tailwind.css'
 import '@/config/google-maps'
-import '@/config/vuefire'
 import '@/config/firebase'
 import '@/config/vue-notification'
 

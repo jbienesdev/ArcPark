@@ -34,9 +34,6 @@ export default {
     },
     isClickable: Boolean
   },
-  firebase: {
-    parkingAreas: db.ref('parking_area')
-  },
   data() {
     return {
       mapConfig: {
@@ -45,6 +42,9 @@ export default {
         maxZoom: 22
       }
     }
+  },
+  created() {
+    this.$store.dispatch('FETCH_PARKING_AREAS')
   },
   methods: {
     onMapClick(e) {
@@ -58,6 +58,11 @@ export default {
     onMarkerClick(e) {
       // const lat = e.latLng.lat()
       // const lng = e.latLng.lng()
+    }
+  },
+  computed: {
+    parkingAreas() {
+      return this.$store.getters['getParkingAreas']
     }
   }
 }

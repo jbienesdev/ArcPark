@@ -1,5 +1,4 @@
 export default {
-  getUserData: state => {
-    return state.user
-  }
+  getUserData: state => state.user,
+  getParkingAreas: state => state.parkingAreas
 }

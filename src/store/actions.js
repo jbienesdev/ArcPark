@@ -20,11 +20,22 @@ export default {
     areaNumber,
     coordinates
   }) => {
+    const { lat, lng } = coordinates
     if(areaNumber)
       return db.ref(`parking_area/${areaNumber}`).set({
-        lat: coordinates.lat,
-        lng: coordinates.lng,
-        status: 'available'
+        lat, lng, status: 'available'
       })
+  },
+  FETCH_PARKING_AREAS: ({ commit }) => {
+    db.ref('parking_area').on('value', snap => {
+      let parkingAreaArray = []
+      snap.forEach((childSnap) => {
+        parkingAreaArray.push({
+          ".key": childSnap.key,
+          ...childSnap.val()
+        })
+      })
+      commit('SET_PARKING_AREAS', parkingAreaArray)
+    })
   }
 }
