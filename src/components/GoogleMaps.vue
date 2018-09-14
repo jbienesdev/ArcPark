@@ -50,10 +50,17 @@ export default {
       })
     },
     onMarkerClick(parkingArea) {
+      // Save parkingArea details to vuex store upon click.
+      this.$store.commit('SET_CLICKED_COORDINATES', parkingArea)
+
       if(parkingArea.status === 'available') {
-        this.$store.commit('SET_CLICKED_COORDINATES', parkingArea)
         this.$store.commit('MODAL_TYPE', {
           type: 'modify',
+          visible: true
+        })
+      } else if(parkingArea.status === 'waiting') {
+        this.$store.commit('MODAL_TYPE', {
+          type: 'waiting',
           visible: true
         })
       }

@@ -81,6 +81,22 @@
         </div>
       </form>
     </div>
+    
+    <!-- Waiting modal -->
+    <div v-else-if="modalType === 'waiting'" class="w-full h-full fixed pin z-10 flex justify-center items-center">
+      <form class="bg-white shadow-md rounded px-10 pt-6 pb-8 mb-4 md:w-1/3">
+        <p class="text-red text-lg mb-2 font-bold">Warning!</p>
+        <p class="text-gray text-sm font-light ">Are you sure you want to change this area back to available? This process can't be undone.</p>
+        
+        <div class="mb-6"></div>
+        <div class="flex items-center justify-between">
+          <button @click="cancelWaiting" class="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            Do It!
+          </button>
+          <a class="cursor-pointer text-red hover:text-red-darker no-underline" @click="$store.commit('MODAL_TYPE', { visible: false })">Cancel</a>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -150,6 +166,22 @@ export default {
           type: 'success',
           title: 'Success!',
           text: `${this.plateNumber} is now checked out at area ${this.getClickedCoordinates['.key']}`
+        })
+      })
+    },
+    cancelWaiting() {
+      const { lat, lng } = this.getClickedCoordinates
+      db.ref(`parking_area/${this.getClickedCoordinates['.key']}`).set({
+        counter: 1,
+        status: 'available',
+        lat,
+        lng
+      }).then(() => {
+        this.$store.commit('MODAL_TYPE', { visible: false })
+        this.$notify({
+          type: 'success',
+          title: 'Success!',
+          text: `Area ${this.getClickedCoordinates['.key']} is now available.`
         })
       })
     }
