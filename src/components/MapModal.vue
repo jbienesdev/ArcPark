@@ -39,7 +39,7 @@
     <div v-else-if="modalType === 'modify'" class="w-full h-full fixed pin z-10 flex justify-center items-center">
       <form class="bg-white shadow-md rounded px-10 pt-6 pb-8 mb-4 md:w-1/3">
         <p v-if="getClickedCoordinates.status === 'available'" class="text-green text-sm font-light">&#11044; Available</p>
-        <p v-else-if="getClickedCoordinates.status === 'unavailable'" class="text-red-light text-sm font-light">&#11044; Unavailable</p>
+        <p v-else-if="getClickedCoordinates.status === 'unavailable'" class="text-red-light text-sm font-light">&#11044; Occupied</p>
         <div class="my-2 md:mb-4">
           <label class="block text-grey-darker text-sm font-bold mb-2" for="plate-number">
             Plate Number

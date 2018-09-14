@@ -12,9 +12,7 @@
         v-for="parkingArea in parkingAreas"
         :key="parkingArea['.key']"
         :position="{ lat: parseFloat(parkingArea.lat), lng: parseFloat(parkingArea.lng) }"
-        :icon="parkingArea.status === 'available' 
-          ? 'https://firebasestorage.googleapis.com/v0/b/nuxt-blog-536a8.appspot.com/o/PulsatingGreen.svg?alt=media&token=2ef3019f-4524-4601-9b69-8ba78a011854' 
-          : 'https://firebasestorage.googleapis.com/v0/b/nuxt-blog-536a8.appspot.com/o/PulsatingRed.svg?alt=media&token=cc9210d5-d822-4835-923a-c93f84c64956'"
+        :icon="parkingAreaStatus(parkingArea.status)"
         @click="onMarkerClick(parkingArea)"
       />
     </GmapMap>
@@ -52,11 +50,21 @@ export default {
       })
     },
     onMarkerClick(parkingArea) {
-      this.$store.commit('SET_CLICKED_COORDINATES', parkingArea)
-      this.$store.commit('MODAL_TYPE', {
-        type: 'modify',
-        visible: true
-      })
+      if(parkingArea.status === 'available') {
+        this.$store.commit('SET_CLICKED_COORDINATES', parkingArea)
+        this.$store.commit('MODAL_TYPE', {
+          type: 'modify',
+          visible: true
+        })
+      }
+    },
+    parkingAreaStatus(status) {
+      if (status === 'available')
+        return 'https://firebasestorage.googleapis.com/v0/b/arcpark-1532921739973.appspot.com/o/PulsatingGreen.svg?alt=media&token=fc953a99-97bb-4348-a4e1-ef4051ae2f50'
+      else if (status === 'waiting')
+        return 'https://firebasestorage.googleapis.com/v0/b/arcpark-1532921739973.appspot.com/o/PulsatingYellow.svg?alt=media&token=1460c775-3f9f-47f8-82cb-7453d27614dc'
+      else if (status === 'unavailable')
+        return 'https://firebasestorage.googleapis.com/v0/b/arcpark-1532921739973.appspot.com/o/PulsatingRed.svg?alt=media&token=4b8d31b1-7edc-4ca8-b693-5757ada21246'
     }
   },
   computed: {
