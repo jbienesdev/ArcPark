@@ -46,7 +46,7 @@ export default {
       const lat = e.latLng.lat()
       const lng = e.latLng.lng()
       // Pass data to parent Dashboard component
-      this.$store.dispatch('CLICKED_COORDINATES', { lat, lng })
+      this.$store.commit('SET_CLICKED_COORDINATES', { lat, lng })
       this.$store.commit('TOGGLE_ADDMODAL', true)
     },
     onMarkerClick(e) {

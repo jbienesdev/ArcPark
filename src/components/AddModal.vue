@@ -24,9 +24,7 @@
             <input readonly v-model="getClickedCoordinates.lng" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="username" type="text">
           </div>
         </div>
-        <div class="mb-6">
-          
-        </div>
+        <div class="mb-6"></div>
         <div class="flex items-center justify-between">
           <button @click="addParkingArea" class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
             Add Parking Area

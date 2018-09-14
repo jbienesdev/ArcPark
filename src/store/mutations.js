@@ -11,6 +11,7 @@ export default {
   TOGGLE_ADDMODAL: (state, payload) => {
     state.addModalVisible = payload
   },
+  // gets the coordinate that was clicked in the map
   SET_CLICKED_COORDINATES: (state, payload) => {
     state.clickedCoordinates = payload
   }
