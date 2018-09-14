@@ -8,8 +8,8 @@ export default {
   SET_PARKING_AREAS: (state, payload) => {
     state.parkingAreas = payload
   },
-  TOGGLE_ADDMODAL: (state, payload) => {
-    state.addModalVisible = payload
+  MODAL_TYPE: (state, payload) => {
+    state.modalType = payload
   },
   // gets the coordinate that was clicked in the map
   SET_CLICKED_COORDINATES: (state, payload) => {

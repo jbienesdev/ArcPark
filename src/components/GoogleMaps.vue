@@ -15,7 +15,7 @@
         :icon="parkingArea.status === 'available' 
           ? 'https://firebasestorage.googleapis.com/v0/b/nuxt-blog-536a8.appspot.com/o/PulsatingGreen.svg?alt=media&token=2ef3019f-4524-4601-9b69-8ba78a011854' 
           : 'https://firebasestorage.googleapis.com/v0/b/nuxt-blog-536a8.appspot.com/o/PulsatingRed.svg?alt=media&token=cc9210d5-d822-4835-923a-c93f84c64956'"
-        @click="onMarkerClick"
+        @click="onMarkerClick(parkingArea)"
       />
     </GmapMap>
   </div>
@@ -23,7 +23,6 @@
 
 <script>
 import { mapLayout } from '@/config/mapStyle.js'
-import { db } from '@/config/firebase'
 
 export default {
   props: {
@@ -47,11 +46,17 @@ export default {
       const lng = e.latLng.lng()
       // Pass data to parent Dashboard component
       this.$store.commit('SET_CLICKED_COORDINATES', { lat, lng })
-      this.$store.commit('TOGGLE_ADDMODAL', true)
+      this.$store.commit('MODAL_TYPE', {
+        type: 'add',
+        visible: true
+      })
     },
-    onMarkerClick(e) {
-      // const lat = e.latLng.lat()
-      // const lng = e.latLng.lng()
+    onMarkerClick(parkingArea) {
+      this.$store.commit('SET_CLICKED_COORDINATES', parkingArea)
+      this.$store.commit('MODAL_TYPE', {
+        type: 'modify',
+        visible: true
+      })
     }
   },
   computed: {

@@ -13,7 +13,7 @@ export default new Vuex.Store({
     user: null,
     isLoggedIn: false,
     parkingAreas: [],
-    addModalVisible: false,
+    modalType: null,
     clickedCoordinates: null
   },
   actions,

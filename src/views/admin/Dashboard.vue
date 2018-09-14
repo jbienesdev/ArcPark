@@ -1,9 +1,9 @@
 <template>
   <div>
     <navbar/>
-    <add-modal 
-      v-if="addModalVisible"
-    ></add-modal>
+    <map-modal 
+      v-if="getModalType && getModalType.visible"
+    ></map-modal>
     <google-maps
       :isClickable="isClickable"
     ></google-maps>
@@ -16,27 +16,22 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import GoogleMaps from '@/components/GoogleMaps.vue'
-import AddModal from '@/components/AddModal.vue'
+import MapModal from '@/components/MapModal.vue'
 
 export default {
   components: {
     Navbar,
     GoogleMaps,
-    AddModal
+    MapModal
   },
   data() {
     return {
       isClickable: true
     }
   },
-  methods: {
-    closeModal() {
-      this.addModalVisible = false
-    }
-  },
   computed: {
-    addModalVisible() {
-      return this.$store.getters['getAddModalState']
+    getModalType() {
+      return this.$store.getters['getModalType']
     }
   }
 }

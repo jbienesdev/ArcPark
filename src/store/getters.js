@@ -1,6 +1,6 @@
 export default {
   getUserData: state => state.user,
   getParkingAreas: state => state.parkingAreas,
-  getAddModalState: state => state.addModalVisible,
+  getModalType: state => state.modalType,
   getClickedCoordinates: state => state.clickedCoordinates
 }
