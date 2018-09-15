@@ -110,6 +110,7 @@ export default {
     }
   },
   methods: {
+    // Adds a parking area
     addParkingArea() {
       let { areaNumber, coordinates } = this
       // If areaNumber is empty
@@ -128,6 +129,7 @@ export default {
         })
       }
     },
+    // Vehicle is going in the aprking area
     checkInVehicle() {
       const { lat, lng } = this.getClickedCoordinates
       if(this.plateNumber) {
@@ -136,7 +138,8 @@ export default {
           plate_number: this.plateNumber,
           status: 'waiting',
           lat,
-          lng
+          lng,
+          distance_in_cm: 0
         }).then(() => {
           this.$store.commit('MODAL_TYPE', { visible: false })
           this.$notify({
@@ -153,6 +156,7 @@ export default {
         })
       }
     },
+    // Vehicle is going out of the parking area
     checkOutVehicle() {
       const { lat, lng } = this.getClickedCoordinates
       db.ref(`parking_area/${this.getClickedCoordinates['.key']}`).set({
@@ -169,13 +173,15 @@ export default {
         })
       })
     },
+    // Cancel waiting status
     cancelWaiting() {
       const { lat, lng } = this.getClickedCoordinates
       db.ref(`parking_area/${this.getClickedCoordinates['.key']}`).set({
         counter: 1,
         status: 'available',
         lat,
-        lng
+        lng,
+        distance_in_cm: 0
       }).then(() => {
         this.$store.commit('MODAL_TYPE', { visible: false })
         this.$notify({

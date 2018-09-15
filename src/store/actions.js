@@ -23,7 +23,7 @@ export default {
     const { lat, lng } = coordinates
     if(areaNumber)
       return db.ref(`parking_area/${areaNumber}`).set({
-        lat, lng, status: 'available'
+        lat, lng, status: 'available', distance_in_cm: 0
       })
   },
   FETCH_PARKING_AREAS: ({ commit }) => {
