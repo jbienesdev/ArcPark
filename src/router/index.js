@@ -30,6 +30,12 @@ export default new Router({
       name: 'admin-dashboard',
       component: () => import('../views/admin/Dashboard.vue'),
       beforeEnter: AuthGuard.privateRoute
+    },
+    {
+      path: '/admin/logs',
+      name: 'logs-page',
+      component: () => import('../views/admin/LogsPage.vue'),
+      beforeEnter: AuthGuard.privateRoute
     }
   ]
 })

@@ -1,11 +1,11 @@
 <template>
-  <div class="nav shadow-md flex justify-between items-center px-8">
-    <p class="font-bold uppercase text-blue tracking-wide">ArcPark</p>
+  <div class="nav shadow-md flex justify-between items-center px-8 bg-indigo">
+    <router-link to="/admin/dashboard" class="font-bold uppercase text-white tracking-wide hover:underline no-underline">ArcPark</router-link>
     <div class="flex justify-center items-center">
-      <a class="px-8 text-sm">Logs</a>
+      <router-link class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 mx-4 rounded no-underline" to="/admin/logs">Logs</router-link>
       <div class="flex items-center flex-col">
-        <p class="text-sm">test@test.com</p>
-        <a href="" class="text-sm text-red-light" @click="logOutUser">Logout</a>
+        <!-- <p class="text-xs text-white">test@test.com</p> -->
+        <a class="bg-red-light hover:bg-red text-white font-bold py-2 px-4 rounded no-underline cursor-pointer" @click="logOutUser">Logout</a>
       </div>
       <!-- <ul class="absolute">
         <li>a</li>
@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  name: 'navbar',
   methods: {
     logOutUser() {
       this.$store.dispatch('LOG_OUT_USER')

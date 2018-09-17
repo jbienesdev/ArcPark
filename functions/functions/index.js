@@ -1,5 +1,7 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
+const getTime = require('date-fns/get_time')
+const format = require('date-fns/format')
 admin.initializeApp()
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -31,18 +33,27 @@ exports.logTransaction = functions.database.ref('/parking_area/{areaNumber}/stat
       // Must have the plate number
       if(status === 'available') {
         admin.database().ref('logs').push({
-          time: new Date().toLocaleString(),
-          message: `Area ${context.params.areaNumber} is now available.`
+          time: format(new Date(), 'h:mm a'),
+          timestamp: getTime(new Date()),
+          date: format(new Date(), 'MMM DD, YYYY'),
+          message: `Area ${context.params.areaNumber} is now available.`,
+          status: 'available'
         })
       } else if(status === 'waiting') {
         admin.database().ref('logs').push({
-          time: new Date().toLocaleString(),
-          message: `${ plateNumber } has entered the parking area.`
+          time: format(new Date(), 'h:mm a'),
+          timestamp: getTime(new Date()),
+          date: format(new Date(), 'MMM DD, YYYY'),
+          message: `${ plateNumber } has entered the parking area. Assigned to area ${context.params.areaNumber}`,
+          status: 'waiting'
         })
       } else if(status === 'unavailable') {
         admin.database().ref('logs').push({
-          time: new Date().toLocaleString(),
-          message: `${ plateNumber } is now parked at ${context.params.areaNumber}.`
+          time: format(new Date(), 'h:mm a'),
+          timestamp: getTime(new Date()),
+          date: format(new Date(), 'MMM DD, YYYY'),
+          message: `${ plateNumber } is now parked at ${context.params.areaNumber}.`,
+          status: 'unavailable'
         })
       }
     })
