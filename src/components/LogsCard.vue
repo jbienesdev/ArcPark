@@ -11,7 +11,6 @@
       class=" shadow hover:shadow-lg px-5 py-4 mb-5 rounded-lg flex border border-t-0 border-r-0 border-b-0 border-l-4" >
       <div class="flex-auto self-center">
         <p class="text-indigo-darker font-semibold">{{ log.message }}</p>
-        <p class="text-xs text-grey-dark">{{ log.distanceInWordsToNow }}</p>
       </div>
       <div class="flex-no-grow text-center text-xs text-grey-dark">
         <p>{{ log.time }}</p>

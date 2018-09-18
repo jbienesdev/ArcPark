@@ -33,25 +33,25 @@ exports.logTransaction = functions.database.ref('/parking_area/{areaNumber}/stat
       // Must have the plate number
       if(status === 'available') {
         admin.database().ref('logs').push({
-          time: format(new Date(), 'h:mm a'),
-          timestamp: getTime(new Date()),
-          date: format(new Date(), 'MMM DD, YYYY'),
+          time: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a'),
+          timestamp: getTime(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' })),
+          date: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY'),
           message: `Area ${context.params.areaNumber} is now available.`,
           status: 'available'
         })
       } else if(status === 'waiting') {
         admin.database().ref('logs').push({
-          time: format(new Date(), 'h:mm a'),
-          timestamp: getTime(new Date()),
-          date: format(new Date(), 'MMM DD, YYYY'),
+          time: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a'),
+          timestamp: getTime(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' })),
+          date: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY'),
           message: `${ plateNumber } has entered the parking area. Assigned to area ${context.params.areaNumber}`,
           status: 'waiting'
         })
       } else if(status === 'unavailable') {
         admin.database().ref('logs').push({
-          time: format(new Date(), 'h:mm a'),
-          timestamp: getTime(new Date()),
-          date: format(new Date(), 'MMM DD, YYYY'),
+          time: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a'),
+          timestamp: getTime(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' })),
+          date: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY'),
           message: `${ plateNumber } is now parked at ${context.params.areaNumber}.`,
           status: 'unavailable'
         })

@@ -10,6 +10,7 @@ import '@/config/google-maps'
 import '@/config/firebase'
 import '@/config/vue-notification'
 
+
 Vue.config.productionTip = false
 
 new Vue({

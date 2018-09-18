@@ -1,13 +1,19 @@
 <template>
   <div>
     <navbar/>
+    <div class="flex">
+      <multiselect
+        v-model="selected"
+        :options="options"
+        class="w-1/3"
+      ></multiselect>
+    </div>
     <logs-table :logs="logs"/>
   </div>
 </template>
 
 <script>
 import { db } from '@/config/firebase'
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import Navbar from '@/components/Navbar.vue'
 import LogsTable from '@/components/LogsCard.vue'
 export default {
@@ -17,7 +23,7 @@ export default {
   },
   data() {
     return {
-      logs: []
+      logs: [],
     }
   },
   created() {
@@ -26,12 +32,13 @@ export default {
       snapshot.forEach(childSnap => {
         logsArr.push({
           '.key': childSnap.key,
-          distanceInWordsToNow: distanceInWordsToNow(childSnap.val().timestamp),
           ...childSnap.val()
         })
       })
+      console.log()
       this.logs = logsArr.reverse()
     })
   }
 }
 </script>
+
