@@ -1,14 +1,8 @@
 <template>
   <div>
     <navbar/>
-    <div class="flex">
-      <multiselect
-        v-model="selected"
-        :options="options"
-        class="w-1/3"
-      ></multiselect>
-    </div>
-    <logs-table :logs="logs"/>
+    <log-filter></log-filter>
+    <logs-table :logs="logFilterData"/>
   </div>
 </template>
 
@@ -16,10 +10,12 @@
 import { db } from '@/config/firebase'
 import Navbar from '@/components/Navbar.vue'
 import LogsTable from '@/components/LogsCard.vue'
+import LogFilter from '@/components/LogFilter.vue'
 export default {
   components: {
     Navbar,
-    LogsTable
+    LogsTable,
+    LogFilter
   },
   data() {
     return {
@@ -35,9 +31,24 @@ export default {
           ...childSnap.val()
         })
       })
-      console.log()
       this.logs = logsArr.reverse()
     })
+    // To refresh the store on route change
+    this.$store.commit('CHANGE_LOG_FILTER', 'All')
+  },
+  computed: {
+    logFilterData() {
+      switch(this.$store.getters['getLogFilter']){
+        case 'All':
+          return this.logs
+        case 'Available':
+          return this.logs.filter(item => item.status === 'available')
+        case 'Waiting':
+          return this.logs.filter(item => item.status === 'waiting')
+        case 'Unavailable':
+          return this.logs.filter(item => item.status === 'unavailable')
+      }
+    }
   }
 }
 </script>

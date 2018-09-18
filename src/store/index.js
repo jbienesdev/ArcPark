@@ -14,7 +14,8 @@ export default new Vuex.Store({
     isLoggedIn: false,
     parkingAreas: [],
     modalType: null,
-    clickedCoordinates: null
+    clickedCoordinates: null,
+    logFilter: ''
   },
   actions,
   mutations,
