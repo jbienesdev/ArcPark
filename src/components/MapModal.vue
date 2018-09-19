@@ -183,6 +183,8 @@
 
 <script>
 import { db } from '@/config/firebase'
+import jsPDF from 'jspdf'
+import format from 'date-fns/format'
 export default {
   data() {
     return {
@@ -233,6 +235,25 @@ export default {
               title: 'Success!',
               text: `${this.plateNumber} can now park to area ${this.getClickedCoordinates['.key']}`
             })
+
+            let doc = new jsPDF({
+              orientation: 'landscape',
+              unit: 'in',
+              format: [2.5, 1.5]
+            })
+            doc.setFontSize(8)
+            doc.setFontType("bold")
+            doc.text('ArcPark: Parking Allocation System', 0.3, 0.3)
+            doc.setFontType("normal")
+            doc.text(`Time: ${ format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a') }`, 0.3, 0.4)
+            doc.text(`Date: ${ format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY') }`, 0.3, 0.5)
+            doc.text(`Plate Number: ${ this.plateNumber }`, 0.3, 0.6)
+            doc.text(`Area Number: `, 0.3, 0.7)
+            doc.setFontType("bold")
+            doc.setFontSize(24)
+            doc.text(`${ this.getClickedCoordinates['.key'] }`, 1.1, 1.2)
+            doc.output('dataurlnewwindow')
+
           })
         } else if(statusFrom === 'reservation') { //If the status is reserved
           db.ref(`parking_area/${this.getClickedCoordinates['.key']}`).set({
@@ -250,6 +271,25 @@ export default {
               title: 'Success!',
               text: `${this.plateNumber} can now park to area ${this.getClickedCoordinates['.key']}`
             })
+
+            let doc = new jsPDF({
+              orientation: 'landscape',
+              unit: 'in',
+              format: [2.5, 1.5]
+            })
+            doc.setFontSize(8)
+            doc.setFontType("bold")
+            doc.text('ArcPark: Parking Allocation System', 0.3, 0.3)
+            doc.setFontType("normal")
+            doc.text(`Time: ${ format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a') }`, 0.3, 0.4)
+            doc.text(`Date: ${ format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY') }`, 0.3, 0.5)
+            doc.text(`Reserved to: ${ this.getClickedCoordinates.reservedTo }`, 0.3, 0.6)
+            doc.text(`Plate Number: ${ this.plateNumber }`, 0.3, 0.7)
+            doc.text(`Area Number: `, 0.3, 0.8)
+            doc.setFontType("bold")
+            doc.setFontSize(24)
+            doc.text(`${ this.getClickedCoordinates['.key'] }`, 1.1, 1.2)
+            doc.output('dataurlnewwindow')
           })
         }
       } else {
