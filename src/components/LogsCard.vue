@@ -7,6 +7,7 @@
         :class="{ 
           'border-green': log.status === 'available', 
           'border-yellow': log.status === 'waiting', 
+          'border-grey': log.status === 'reserved', 
           'border-red-light': log.status === 'unavailable' 
         }" 
         class=" shadow hover:shadow-lg px-5 py-4 mb-5 rounded-lg flex border border-t-0 border-r-0 border-b-0 border-l-4" >

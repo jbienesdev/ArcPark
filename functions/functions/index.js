@@ -29,6 +29,7 @@ exports.logTransaction = functions.database.ref('/parking_area/{areaNumber}/stat
     let status = change.after.val()
     return admin.database().ref(`parking_area/${context.params.areaNumber}`).once('value', snapshot => {
       let plateNumber = snapshot.val().plate_number
+      let reservedTo = snapshot.val().reservedTo
 
       // Must have the plate number
       if(status === 'available') {
@@ -39,12 +40,20 @@ exports.logTransaction = functions.database.ref('/parking_area/{areaNumber}/stat
           message: `Area ${context.params.areaNumber} is now available.`,
           status: 'available'
         })
+      } else if(status === 'reserved') {
+        admin.database().ref('logs').push({
+          time: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a'),
+          timestamp: getTime(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' })),
+          date: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY'),
+          message: `${ reservedTo } is now reserved for area ${context.params.areaNumber}.`,
+          status: 'reserved'
+        })
       } else if(status === 'waiting') {
         admin.database().ref('logs').push({
           time: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a'),
           timestamp: getTime(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' })),
           date: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY'),
-          message: `${ plateNumber } has entered the parking area. Assigned to area ${context.params.areaNumber}`,
+          message: `${ !reservedTo ? `${ plateNumber } has entered the parking area. Assigned to area ${context.params.areaNumber}` : `${ reservedTo }(${ plateNumber }) has entered the parking area. Assigned to area ${context.params.areaNumber}`}`,
           status: 'waiting'
         })
       } else if(status === 'unavailable') {
