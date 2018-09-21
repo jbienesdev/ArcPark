@@ -38,8 +38,13 @@
     <!-- Modify Modal -->
     <div v-else-if="modalType === 'modify'" class="w-full h-full fixed pin z-10 flex justify-center items-center">
       <form class="bg-white shadow-md rounded px-10 pt-6 pb-8 mb-4 md:w-1/3">
-        <p v-if="getClickedCoordinates.status === 'available'" class="text-green text-sm font-light">&#11044; Available</p>
-        <p v-else-if="getClickedCoordinates.status === 'unavailable'" class="text-red-light text-sm font-light">&#11044; Occupied</p>
+        <div class="flex">
+          <p v-if="getClickedCoordinates.status === 'available'" class="text-green text-sm font-light w-1/2">&#11044; Available</p>
+          <div v-if="getClickedCoordinates.status === 'available'" @click="deleteParkingArea(getClickedCoordinates['.key'])" class="text-red text-sm font-light w-1/2 flex justify-end hover:underline cursor-pointer">
+            <i class="fa fa-trash pr-2" aria-hidden="true"></i> Delete Parking Area
+          </div>
+          <p v-else-if="getClickedCoordinates.status === 'unavailable'" class="text-red-light text-sm font-light">&#11044; Occupied</p>
+        </div>
         <div class="my-2 md:mb-4" v-if="getClickedCoordinates.status !== 'unavailable'">
           <label class="block text-grey-darker text-sm font-bold mb-2" for="plate-number">
             Reservation Type
@@ -365,6 +370,18 @@ export default {
     cancelReservation() {
       // The same as cancel waiting method
       this.cancelWaiting()
+    },
+    deleteParkingArea(areaNumber) {
+      if(confirm('Are you sure you want to delete this area number?')) {
+        db.ref(`parking_area/${areaNumber}`).remove().then(() => {
+          this.$store.commit('MODAL_TYPE', { visible: false })
+          this.$notify({
+            type: 'success',
+            title: 'Success!',
+            text: `Area ${areaNumber} is now deleted.`
+          })
+        })
+      }
     }
   },
   computed: {
@@ -379,6 +396,7 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 .modal-bg::before {
   content: '';
   display: block;

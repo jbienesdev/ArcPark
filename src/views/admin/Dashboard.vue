@@ -7,6 +7,7 @@
     <google-maps
       :isClickable="isClickable"
     ></google-maps>
+    <check-out></check-out>
     <!-- <button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" @click="logOutUser">
       Log out
     </button> -->
@@ -17,12 +18,14 @@
 import Navbar from '@/components/Navbar.vue'
 import GoogleMaps from '@/components/GoogleMaps.vue'
 import MapModal from '@/components/MapModal.vue'
+import CheckOut from '@/components/CheckOutInput.vue'
 
 export default {
   components: {
     Navbar,
     GoogleMaps,
-    MapModal
+    MapModal,
+    CheckOut
   },
   data() {
     return {

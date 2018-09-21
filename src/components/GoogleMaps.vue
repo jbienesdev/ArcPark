@@ -4,7 +4,7 @@
     <GmapMap
       :center="{lat:6.912826, lng:122.060384}"
       :zoom="21"
-      style="width: 100%; height: 600px"
+      style="width: 100%; height: 500px"
       :options="mapConfig"
       v-on="isClickable ? { click: onMapClick } : {}"
     >
@@ -69,7 +69,6 @@ export default {
     onMarkerClick(parkingArea) {
       // Save parkingArea details to vuex store upon click.
       this.$store.commit('SET_CLICKED_COORDINATES', parkingArea)
-      console.log(parkingArea.status)
       if(parkingArea.status === 'available' || parkingArea.status === 'unavailable') {
         this.$store.commit('MODAL_TYPE', {
           type: 'modify',
@@ -110,7 +109,7 @@ export default {
       }
       if(parkingArea.plate_number) {
         currentStatusText += `
-        ${ parkingArea.plate_number ? `Reserved to: ${ parkingArea.plate_number }` : '' }`
+        ${ parkingArea.plate_number ? `Plate Number: ${ parkingArea.plate_number }` : '' }`
       }
       this.statusText = currentStatusText
     }
