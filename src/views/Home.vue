@@ -4,8 +4,20 @@
     <google-maps
       :isClickable="isClickable"
     ></google-maps>
+
+    <div class="p-4 fixed legend bg-white rounded shadow">
+      <h1 class="text-sm text-grey-darker mb-2">Map Legend</h1>
+      <div class="flex flex-col text-sm text-grey-darkest">
+        <div class=" text-green">&#11044; Available</div>
+        <div class=" text-grey-dark">&#11044; Reserved</div>
+        <div class=" text-yellow">&#11044; Waiting</div>
+        <div class=" text-red-light">&#11044; Unavailable</div>
+      </div>
+    </div>
+
+    <!-- Chatbot modal -->
     <div v-if="chatBoxModal" class="bg-modal flex justify-center items-center">
-      <i @click="chatBoxModal = false" class="fa fa-times hover:bg-grey-darkest bg-black rounded-full text-white fixed close-btn px-2 py-2 cursor-pointer" aria-hidden="true"></i>
+      <i @click="chatBoxModal = false" class="fa fa-times hover:bg-grey rounded-full text-white fixed close-btn px-2 py-2 cursor-pointer" aria-hidden="true"></i>
       <iframe
         allow="microphone;"
         width="350"
@@ -59,5 +71,9 @@ export default {
   top: 20px;
   left: 20px;
   z-index: 100;
+}
+.legend {
+  top: 110px;
+  left: 10px;
 }
 </style>

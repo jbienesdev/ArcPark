@@ -30,6 +30,7 @@
           <p>{{ statusText }}</p>
         </div>
       </div>
+      <h1>Hello</h1>
     </GmapMap>
   </div>
 </template>
@@ -125,7 +126,7 @@ export default {
 <style scoped>
 .info-marker {
   bottom: 10%; 
-  left: 2%; 
+  left: 10px; 
   color: white; 
   position: absolute; 
   z-index: 100;
