@@ -3,14 +3,7 @@ const admin = require('firebase-admin')
 const {WebhookClient} = require('dialogflow-fulfillment');
 const getTime = require('date-fns/get_time')
 const format = require('date-fns/format')
-admin.initializeApp({
-  apiKey: "AIzaSyCUbLt0vI0Y6jwx7m1z0IPGdDI1DxhfULc",
-  authDomain: "arcpark-1532921739973.firebaseapp.com",
-  databaseURL: "https://arcpark-1532921739973.firebaseio.com",
-  projectId: "arcpark-1532921739973",
-  storageBucket: "arcpark-1532921739973.appspot.com",
-  messagingSenderId: "569429999510"
-})
+admin.initializeApp()
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 
@@ -24,7 +17,7 @@ exports.startLockdownTimer = functions.database.ref('/parking_area/{areaNumber}/
       }
 
       if(counter === 3) {
-        change.after.ref.parent.child('status').set('unavailable')
+        change.after.ref.parent.child('status').set('occupied')
         change.after.ref.parent.child('counter').set(1)
       } else {
         change.after.ref.parent.child('counter').set(counter + 1)
@@ -64,13 +57,13 @@ exports.logTransaction = functions.database.ref('/parking_area/{areaNumber}/stat
           message: `${ !reservedTo ? `${ plateNumber } has entered the parking area. Assigned to area ${context.params.areaNumber}` : `${ reservedTo }(${ plateNumber }) has entered the parking area. Assigned to area ${context.params.areaNumber}`}`,
           status: 'waiting'
         })
-      } else if(status === 'unavailable') {
+      } else if(status === 'occupied') {
         admin.database().ref('logs').push({
           time: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a'),
           timestamp: getTime(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' })),
           date: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY'),
           message: `${ plateNumber } is now parked at ${context.params.areaNumber}.`,
-          status: 'unavailable'
+          status: 'occupied'
         })
       }
     })
@@ -104,4 +97,4 @@ exports.dialogflowAvailableSpaces = functions.https.onRequest((request, response
 // Status node is changed to waiting
 // Sensor is now emitting ultrasonnic waves (every 15sec)
 // If distance is less than 30 then increment counter else reset counter to 0
-// If counter reaches 3 (45sec in total) then change status to unavailable
+// If counter reaches 3 (45sec in total) then change status to occupied
