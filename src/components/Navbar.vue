@@ -1,7 +1,7 @@
 <template>
   <div class="nav shadow-md flex justify-between items-center px-8 bg-indigo">
     <router-link to="/admin/dashboard" class="font-bold uppercase text-white tracking-wide hover:underline no-underline">ArcPark</router-link>
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center" v-if="$store.getters.getUserData">
       <router-link class="bg-teal hover:bg-teal-dark text-white font-bold py-2 px-4 mx-4 rounded no-underline text-xs" to="/admin/logs">Logs</router-link>
       <div class="flex items-center flex-col">
         <!-- <p class="text-xs text-white">test@test.com</p> -->

@@ -206,12 +206,22 @@ export default {
       let { areaNumber, coordinates } = this
       // If areaNumber is empty
       if(areaNumber) {
-        this.$store.dispatch('ADD_PARKING_AREA', {
-          areaNumber,
-          coordinates: this.getClickedCoordinates
-        }).then(() => {
-          this.$store.commit('MODAL_TYPE', { visible: false })
-        })
+        let returnedParkingArea = this.$store.getters['getParkingAreas'].filter(parkingArea => parkingArea['.key'] === areaNumber)
+        if(!returnedParkingArea.length) {
+          this.$store.dispatch('ADD_PARKING_AREA', {
+            areaNumber,
+            coordinates: this.getClickedCoordinates
+          }).then(() => {
+            this.$store.commit('MODAL_TYPE', { visible: false })
+          })
+        } else {
+          this.areaNumber = ''
+          this.$notify({
+            type: 'error',
+            title: 'Error',
+            text: 'Area number already exists.'
+          })
+        }
       } else {
         this.$notify({
           type: 'error',

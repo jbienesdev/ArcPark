@@ -20,5 +20,7 @@ export default new Vuex.Store({
   actions,
   mutations,
   getters,
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState({
+    paths: ['user', 'isLoggedIn']
+  })]
 })
