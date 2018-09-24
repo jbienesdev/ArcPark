@@ -34,7 +34,7 @@ export default {
             })
           })
           // Callback function to make a certain parking area to be available.
-          let result = this.checkIfUnavailable(parkingAreas, oneParkingArea => {
+          let result = this.checkIfOccupied(parkingAreas, oneParkingArea => {
             db.ref(`parking_area/${oneParkingArea.key}`).set({
               counter: 1,
               lat: oneParkingArea.lat,
@@ -66,7 +66,7 @@ export default {
         })
       }
     },
-    checkIfUnavailable(parkingAreas, editDataToFireabse) {
+    checkIfOccupied(parkingAreas, editDataToFireabse) {
       let areaNumberIsFoundHolder = parkingAreas.filter(parkingArea => parkingArea.key === this.areaNumber)
       if (!areaNumberIsFoundHolder.length) {
         return {
@@ -75,11 +75,11 @@ export default {
         }
       }
 
-      if(areaNumberIsFoundHolder[0].status === 'unavailable') {
+      if(areaNumberIsFoundHolder[0].status === 'occupied') {
         return editDataToFireabse(areaNumberIsFoundHolder[0])
       } else {
         return {
-          message: 'The parking area is not yet unavailable.',
+          message: 'The parking area is not yet occupied.',
           status: false
         }
       }

@@ -24,13 +24,12 @@
             'bg-green': parkingAreaStatusText === 'available', 
             'bg-yellow-darker': parkingAreaStatusText === 'waiting',
             'bg-grey-darker': parkingAreaStatusText === 'reserved',
-            'bg-red-dark': parkingAreaStatusText === 'unavailable'
+            'bg-red-dark': parkingAreaStatusText === 'occupied'
           }"
           class="info-marker px-4 py-2 rounded">
           <p>{{ statusText }}</p>
         </div>
       </div>
-      <h1>Hello</h1>
     </GmapMap>
   </div>
 </template>
@@ -70,7 +69,7 @@ export default {
     onMarkerClick(parkingArea) {
       // Save parkingArea details to vuex store upon click.
       this.$store.commit('SET_CLICKED_COORDINATES', parkingArea)
-      if(parkingArea.status === 'available' || parkingArea.status === 'unavailable') {
+      if(parkingArea.status === 'available' || parkingArea.status === 'occupied') {
         this.$store.commit('MODAL_TYPE', {
           type: 'modify',
           visible: true
@@ -94,7 +93,7 @@ export default {
         return 'https://firebasestorage.googleapis.com/v0/b/arcpark-1532921739973.appspot.com/o/PulsatingGray.svg?alt=media&token=d1b74198-24fc-429b-94e2-798a63cfc931'
       else if (status === 'waiting')
         return 'https://firebasestorage.googleapis.com/v0/b/arcpark-1532921739973.appspot.com/o/PulsatingYellow.svg?alt=media&token=1460c775-3f9f-47f8-82cb-7453d27614dc'
-      else if (status === 'unavailable')
+      else if (status === 'occupied')
         return 'https://firebasestorage.googleapis.com/v0/b/arcpark-1532921739973.appspot.com/o/PulsatingRed.svg?alt=media&token=4b8d31b1-7edc-4ca8-b693-5757ada21246'
     },
     mouseOverEvent(parkingArea) {

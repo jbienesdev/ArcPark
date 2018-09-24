@@ -5,7 +5,7 @@
       <option class="mr-3">All</option>
       <option class="mr-3">Available</option>
       <option class="mr-3">Waiting</option>
-      <option class="mr-3">Unavailable</option>
+      <option class="mr-3">Occupied</option>
     </select>
   </div>
 </template>

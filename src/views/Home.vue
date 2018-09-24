@@ -11,7 +11,7 @@
         <div class=" text-green">&#11044; Available</div>
         <div class=" text-grey-dark">&#11044; Reserved</div>
         <div class=" text-yellow">&#11044; Waiting</div>
-        <div class=" text-red-light">&#11044; Unavailable</div>
+        <div class=" text-red-light">&#11044; Occupied</div>
       </div>
     </div>
 

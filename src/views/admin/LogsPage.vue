@@ -45,8 +45,8 @@ export default {
           return this.logs.filter(item => item.status === 'available')
         case 'Waiting':
           return this.logs.filter(item => item.status === 'waiting')
-        case 'Unavailable':
-          return this.logs.filter(item => item.status === 'unavailable')
+        case 'Occupied':
+          return this.logs.filter(item => item.status === 'occupied')
       }
     }
   }

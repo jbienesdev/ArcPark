@@ -43,9 +43,9 @@
           <div v-if="getClickedCoordinates.status === 'available'" @click="deleteParkingArea(getClickedCoordinates['.key'])" class="text-red text-sm font-light w-1/2 flex justify-end hover:underline cursor-pointer">
             <i class="fa fa-trash pr-2" aria-hidden="true"></i> Delete Parking Area
           </div>
-          <p v-else-if="getClickedCoordinates.status === 'unavailable'" class="text-red-light text-sm font-light">&#11044; Occupied</p>
+          <p v-else-if="getClickedCoordinates.status === 'occupied'" class="text-red-light text-sm font-light">&#11044; Occupied</p>
         </div>
-        <div class="my-2 md:mb-4" v-if="getClickedCoordinates.status !== 'unavailable'">
+        <div class="my-2 md:mb-4" v-if="getClickedCoordinates.status !== 'occupied'">
           <label class="block text-grey-darker text-sm font-bold mb-2" for="plate-number">
             Reservation Type
           </label>
@@ -59,7 +59,7 @@
             Plate Number
           </label>
           <input v-if="getClickedCoordinates.status === 'available'" v-model.trim="plateNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="plate-number" type="text">
-          <input v-else-if="getClickedCoordinates.status === 'unavailable'" v-model.trim="getClickedCoordinates.plate_number" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="area-number" type="text">
+          <input v-else-if="getClickedCoordinates.status === 'occupied'" v-model.trim="getClickedCoordinates.plate_number" disabled class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="area-number" type="text">
         </div>
         <div class="my-2 md:mb-4" v-else-if="reservationType === 'Reservation'">
           <label class="block text-grey-darker text-sm font-bold mb-2" for="reserve-for">
@@ -97,7 +97,7 @@
           <button v-if="getClickedCoordinates.status === 'available' && reservationType === 'Reservation'" @click="reserveVehicle" class="bg-green hover:bg-green-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
             Reserve Now!
           </button>
-          <button v-if="getClickedCoordinates.status === 'unavailable'" @click="checkOutVehicle" class="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+          <button v-if="getClickedCoordinates.status === 'occupied'" @click="checkOutVehicle" class="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
             Check Out
           </button>
           <a class="cursor-pointer text-red hover:text-red-darker no-underline" @click="$store.commit('MODAL_TYPE', { visible: false })">Cancel</a>
