@@ -8,6 +8,7 @@
 
 <script>
 import { db } from '@/config/firebase'
+import format from 'date-fns/format'
 import Navbar from '@/components/Navbar.vue'
 import LogsTable from '@/components/LogsCard.vue'
 import LogFilter from '@/components/LogFilter.vue'
@@ -34,22 +35,34 @@ export default {
       this.logs = logsArr.reverse()
     })
     // To refresh the store on route change
-    this.$store.commit('CHANGE_LOG_FILTER', 'All')
+    this.$store.commit('CHANGE_STATUS_FILTER', 'All')
+    this.$store.commit('CHANGE_DATE_FILTER', 'All')
   },
   computed: {
     logFilterData() {
-      switch(this.$store.getters['getLogFilter']){
-        case 'All':
-          return this.logs
-        case 'Available':
-          return this.logs.filter(item => item.status === 'available')
-        case 'Waiting':
-          return this.logs.filter(item => item.status === 'waiting')
-        case 'Occupied':
-          return this.logs.filter(item => item.status === 'occupied')
+      let allDates = this.$store.getters['getDateFilter'] === 'All' ? true : false
+      let allStatus = this.$store.getters['getStatusFilter'] === 'All' ? true : false
+
+      if(allDates && allStatus)
+        return this.logs
+      else {
+        if(allDates) {
+          return this.logs.filter(val => {
+            return val.status === this.$store.getters['getStatusFilter'].toLowerCase()
+          })
+        }
+
+        if(allStatus) {
+          return this.logs.filter(val => {
+            return val.date === this.$store.getters['getDateFilter']
+          })
+        }
+
+        return this.logs.filter(val => {
+          return val.date === this.$store.getters['getDateFilter'] && val.status === this.$store.getters['getStatusFilter'].toLowerCase()
+        })
       }
-    }
+    }   
   }
 }
 </script>
-

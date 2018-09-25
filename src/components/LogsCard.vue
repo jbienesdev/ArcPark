@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5 container logs">
-    <div v-if="logs.length !== 0">
+    <div v-if="logs && logs.length !== 0">
       <div
         v-for="log in logs" 
         :key="log['.key']" 

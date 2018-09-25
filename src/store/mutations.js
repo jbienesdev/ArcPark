@@ -15,7 +15,10 @@ export default {
   SET_CLICKED_COORDINATES: (state, payload) => {
     state.clickedCoordinates = payload
   },
-  CHANGE_LOG_FILTER: (state, payload) => {
-    state.logFilter = payload
+  CHANGE_STATUS_FILTER: (state, payload) => {
+    state.statusFilter = payload
+  },
+  CHANGE_DATE_FILTER: (state, payload) => {
+    state.dateFilter = payload
   }
 }
