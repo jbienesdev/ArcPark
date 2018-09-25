@@ -31,6 +31,7 @@ exports.logTransaction = functions.database.ref('/parking_area/{areaNumber}/stat
     return admin.database().ref(`parking_area/${context.params.areaNumber}`).once('value', snapshot => {
       let plateNumber = snapshot.val().plate_number
       let reservedTo = snapshot.val().reservedTo
+      let vehicle_type = snapshot.val().vehicle_type
 
       // Must have the plate number
       if(status === 'available') {
@@ -54,7 +55,7 @@ exports.logTransaction = functions.database.ref('/parking_area/{areaNumber}/stat
           time: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a'),
           timestamp: getTime(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' })),
           date: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY'),
-          message: `${ !reservedTo ? `${ plateNumber } has entered the parking area. Assigned to area ${context.params.areaNumber}` : `${ reservedTo }(${ plateNumber }) has entered the parking area. Assigned to area ${context.params.areaNumber}`}`,
+          message: `${ !reservedTo ? `${ plateNumber } (${vehicle_type}) has entered the parking area. Assigned to area ${context.params.areaNumber}` : `${ reservedTo }(${ plateNumber }) has entered the parking area. Assigned to area ${context.params.areaNumber}`}`,
           status: 'waiting'
         })
       } else if(status === 'occupied') {
@@ -62,7 +63,7 @@ exports.logTransaction = functions.database.ref('/parking_area/{areaNumber}/stat
           time: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'h:mm a'),
           timestamp: getTime(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' })),
           date: format(new Date().toLocaleString('en-US', { timeZone: 'Asia/Manila' }), 'MMM DD, YYYY'),
-          message: `${ plateNumber } is now parked at ${context.params.areaNumber}.`,
+          message: `${ plateNumber } (${vehicle_type}) is now parked at ${context.params.areaNumber}.`,
           status: 'occupied'
         })
       }

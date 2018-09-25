@@ -46,12 +46,21 @@
           <p v-else-if="getClickedCoordinates.status === 'occupied'" class="text-red-light text-sm font-light">&#11044; Occupied</p>
         </div>
         <div class="my-2 md:mb-4" v-if="getClickedCoordinates.status !== 'occupied'">
-          <label class="block text-grey-darker text-sm font-bold mb-2" for="plate-number">
+          <label class="block text-grey-darker text-sm font-bold mb-2" for="reservation">
             Reservation Type
           </label>
-          <select v-model="reservationType" class="w-full text-sm text-grey-dark px-3 py-2 border border-grey-light rounded shadow" id="logfilter">
+          <select v-model="reservationType" class="w-full text-sm text-grey-dark px-3 py-2 border border-grey-light rounded shadow" id="reservation">
             <option class="mr-3">Non-Reservation</option>
             <option class="mr-3">Reservation</option>
+          </select>
+        </div>
+        <div class="my-2 md:mb-4" v-if="reservationType === 'Non-Reservation'">
+          <label class="block text-grey-darker text-sm font-bold mb-2" for="vehicle-type">
+            Vehicle Type
+          </label>
+          <select v-model="vehicleType" :disabled="getClickedCoordinates.status === 'occupied'" :class="getClickedCoordinates.status === 'occupied' ? 'bg-grey-light' : ''" class="w-full text-sm text-grey-dark px-3 py-2 border border-grey-light rounded shadow" id="vehicle-type">
+            <option class="mr-3">Car</option>
+            <option class="mr-3">Motorcycle</option>
           </select>
         </div>
         <div class="my-2 md:mb-4" v-if="reservationType === 'Non-Reservation'">
@@ -141,7 +150,16 @@
 
         <!-- If enter parking area is enabled -->
         <div v-if="reserveActionType === 'Enter Parking Area'">
-          <div class="my-2 md:mb-4" v-if="reservationType === 'Non-Reservation'">
+          <div class="my-2 md:mb-4">
+            <label class="block text-grey-darker text-sm font-bold mb-2" for="vehicle-type">
+              Vehicle Type
+            </label>
+            <select v-model="vehicleType" class="w-full text-sm text-grey-dark px-3 py-2 border border-grey-light rounded shadow" id="vehicle-type">
+              <option class="mr-3">Car</option>
+              <option class="mr-3">Motorcycle</option>
+            </select>
+          </div>
+          <div class="my-2 md:mb-4">
             <label class="block text-grey-darker text-sm font-bold mb-2" for="plate-number">
               Plate Number
             </label>
@@ -197,7 +215,8 @@ export default {
       plateNumber: '',
       reservationType: 'Non-Reservation',
       reservedTo: '',
-      reserveActionType: 'Enter Parking Area'
+      reserveActionType: 'Enter Parking Area',
+      vehicleType: 'Car'
     }
   },
   methods: {
@@ -239,6 +258,7 @@ export default {
           db.ref(`parking_area/${this.getClickedCoordinates['.key']}`).set({
             counter: 1,
             plate_number: this.plateNumber,
+            vehicle_type: this.vehicleType,
             status: 'waiting',
             lat,
             lng,
@@ -275,6 +295,7 @@ export default {
             counter: 1,
             plate_number: this.plateNumber,
             reservedTo: this.getClickedCoordinates.reservedTo,
+            vehicle_type: this.vehicleType,
             status: 'waiting',
             lat,
             lng,

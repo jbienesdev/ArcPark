@@ -111,6 +111,10 @@ export default {
         currentStatusText += `
         ${ parkingArea.plate_number ? `Plate Number: ${ parkingArea.plate_number }` : '' }`
       }
+      if(parkingArea.vehicle_type) {
+        currentStatusText += `
+        ${ parkingArea.vehicle_type ? `Vehicle Type: ${ parkingArea.vehicle_type }` : '' }`
+      }
       this.statusText = currentStatusText
     }
   },
