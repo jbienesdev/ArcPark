@@ -10,7 +10,7 @@
   "dependencies": {
     "date-fns": "^1.29.0",
     "firebase": "^5.4.0",
-    "jspdf": "^1.4.1",
+    "jspdf": "^2.3.1",
     "luxon": "^1.3.3",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
